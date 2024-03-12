@@ -1,8 +1,10 @@
 package com.tpk.JooqAccessLayer.service;
 
+import com.tpk.JooqAccessLayer.dto.AddressDao;
 import com.tpk.JooqAccessLayer.dto.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.jooq.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +28,20 @@ public class JooqService {
 
     public List<UserDao> findByUsernameSQL(String username) {
         return dsl.resultQuery("select * from users where username = ?",username).fetchInto(UserDao.class);
+    }
+
+    public List<AddressDao> findAllAddress() {
+        return dsl.selectFrom(AddressDao.ADDRESS).fetchInto(AddressDao.class);
+    }
+
+    public Result<?> findAllJoinTable() {
+        return dsl
+                .select()
+                .from(UserDao.USERS)
+                .join(AddressDao.ADDRESS)
+                .on( UserDao.USERS + "." + UserDao.USERID
+                        + "=" +
+                        AddressDao.ADDRESS + "." +  AddressDao.USERID)
+                .fetch();
     }
 }

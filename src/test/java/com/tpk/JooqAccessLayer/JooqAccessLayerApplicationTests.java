@@ -12,6 +12,8 @@ import org.testcontainers.containers.MSSQLServerContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import javax.swing.text.Style;
+
 @Testcontainers
 @SpringBootTest
 class JooqAccessLayerApplicationTests {
@@ -52,6 +54,18 @@ class JooqAccessLayerApplicationTests {
 	void findByUsernameSQLNotNull() {
 		String search = "user";
 		var result = jooqService.findByUsernameSQL(search);
+		Assertions.assertNotNull(result);
+	}
+
+	@Test
+	void findAllAddressNotnull() {
+		var result = jooqService.findAllAddress();
+		Assertions.assertNotNull(result);
+	}
+
+	@Test
+	void joinTableNotNull() {
+		var result = jooqService.findAllJoinTable();
 		Assertions.assertNotNull(result);
 	}
 
