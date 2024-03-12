@@ -1,6 +1,7 @@
 package com.tpk.JooqAccessLayer;
 
 import com.tpk.JooqAccessLayer.service.JooqService;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ class JooqAccessLayerApplicationTests {
 		String search = "user";
 		var result = jooqService.findByUsernameSQL(search);
 		Assertions.assertNotNull(result);
+	}
+
+	@AfterAll
+    static void stopContainer(){
+		SQLSERVER_CONTAINER.stop();
 	}
 
 }
