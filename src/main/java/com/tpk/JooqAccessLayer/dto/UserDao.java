@@ -14,4 +14,9 @@ public record UserDao(
 ) {
     public static final String USERS = "users";
     public static final String USERNAME = "username";
+    public static final String USERID = "user_id";
+    public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    public static final String FIRSTNAME = "firstname";
+    public static final String LASTNAME = "lastname";
 }
