@@ -1,6 +1,7 @@
 package com.tpk.JooqAccessLayer.dto;
 
 import lombok.Builder;
+import org.jooq.Record;
 
 @Builder
 public record UserDao(
@@ -11,7 +12,7 @@ public record UserDao(
         String firstname,
         String lastname
 
-) {
+)  {
     public static final String USERS = "users";
     public static final String USERNAME = "username";
     public static final String USERID = "user_id";

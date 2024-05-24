@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.tpk.JooqAccessLayer.dto.UserDao.USERS;
+
 @Service
 @RequiredArgsConstructor
 public class JooqService {
@@ -16,12 +18,12 @@ public class JooqService {
     private final DSLContext dsl;
 
     public List<UserDao> findAll() {
-        return dsl.selectFrom(UserDao.USERS)
+        return dsl.selectFrom(USERS)
                 .fetchInto(UserDao.class);
     }
 
     public List<UserDao> findByUsername(String username) {
-        return dsl.selectFrom(UserDao.USERS)
+        return dsl.selectFrom(USERS)
                 .where("username = ?", username)
                 .fetchInto(UserDao.class);
     }
@@ -37,11 +39,12 @@ public class JooqService {
     public Result<?> findAllJoinTable() {
         return dsl
                 .select()
-                .from(UserDao.USERS)
+                .from(USERS)
                 .join(AddressDao.ADDRESS)
-                .on( UserDao.USERS + "." + UserDao.USERID
+                .on( USERS + "." + UserDao.USERID
                         + "=" +
                         AddressDao.ADDRESS + "." +  AddressDao.USERID)
                 .fetch();
     }
+
 }
